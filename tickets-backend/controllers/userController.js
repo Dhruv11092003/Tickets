@@ -79,3 +79,40 @@ exports.raiseTicket=async(req,res)=>{
         res.status(500).send({message:"Error Raising Ticket",error:e.message})
     }
 }
+
+exports.getAllTicketsOfUser=async(req,res)=>{
+    try{
+        const {user}=req
+        const {user_id}=user
+        console.log(typeof(user_id))
+        const getTickets = await ticket.find({ "raisedBy.userId":user_id});
+        console.log(getTickets)
+        if (getTickets){
+            res.status(200).send({tickets:{getTickets}})
+        }
+    }catch(e){
+        res.status(500).send({error:e.message})
+    }
+}
+
+exports.disableTicket=async(req,res)=>{
+    try{
+    const {ticketId}=req.params
+    const disableTicket=await ticket.findOneAndUpdate({ticketId:ticketId},{status:"Resolved"})
+    if (disableTicket){
+        res.status(200).send({message:"Ticket Revoked Successfully"})
+    }}catch(e){
+        res.status(500).send({error:e.message})
+    }
+}
+
+exports.invokeTicket=async(req,res)=>{
+    try{
+    const {ticketId}=req.params
+    const EnableTicket=await ticket.findOneAndUpdate({ticketId:ticketId},{status:"Created"})
+    if (EnableTicket){
+        res.status(200).send({message:"Ticket Invoked Successfully"})
+    }}catch(e){
+        res.status(500).send({error:e.message})
+    }
+}

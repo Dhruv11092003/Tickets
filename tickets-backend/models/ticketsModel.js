@@ -13,10 +13,10 @@ const ticketSchema = mongoose.Schema(
     description: { type: String, required: true },
     raisedBy: { type: { userId: String, userType: String } },
     assignedTo: {
-      type: { userId: String, name: String, assignedOn: Date }
+      type: { userId: String, name: String, assignedOn: Date },default:{}
     },
     attachments: {
-      type: [{ fileName: String, fileLink: String }]
+      type: [{ fileName: String, fileLink: String }],default:[]
     },
     org_name: { type: String },
   },
