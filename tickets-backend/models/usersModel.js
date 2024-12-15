@@ -24,7 +24,7 @@ const userSchema = mongoose.Schema({
     default: [],
   },
 
-  messages: { type: [{title:String,description:String}], default: [] },
+  messages: { type: [{title:String,description:String,Date:Date}], default: [] },
 }, { timestamps: true });
 
 const User = mongoose.model("Users", userSchema);
