@@ -1,0 +1,222 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Prociono&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Afacad+Flux:wght@100..1000&family=Noto+Sans+TC&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Prociono&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+*{
+    margin: 0;
+    overflow-x:clip;
+    box-sizing: content-box;
+}
+
+
+
+.login-background{
+    min-height:100vh;
+    min-width: 100vw;
+    background-image: url("/public/triangles-1430105_1280.png");
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    background-size: cover;
+    
+}
+
+.login-container{
+    height: 80%;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 8%;
+}
+
+.login-detail-container{
+    height: 10vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    text-align: center;
+    padding: 5px;
+    margin-bottom: 15%;
+    /* border: 1px solid white; */
+}
+
+.ticketwise-heading{
+    font-size: 2rem;
+    font-family: Roboto Mono;
+    font-weight: bold;
+}
+
+.ticketwise-Para{
+    font-size: 1rem;
+    margin-top: 0px;
+    font-family: "Nunito Sans", serif;
+}
+
+.login-signin-para{
+    margin-top: 15px;
+    font-size: 18px;
+    color: whitesmoke;
+    font-family: "Nunito Sans", serif;
+}
+
+.login-detail-container{
+    color: white;
+}
+
+.heading-login-signup{
+    color:white;
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-family: "Nunito Sans", serif;
+    text-align: center;
+}
+
+.form-container{
+    margin-top: 8%;
+    height: 80%;
+    min-height: 300px;
+    min-width: 500px;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.login-form{
+    border-radius: 10px;
+    height:100%;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.63);
+    border: 1px solid white;
+    padding: 25px;
+}
+
+.form-label{
+    color: rgb(62, 62, 62);
+}
+
+.form-item{
+    display: flex;
+    flex-direction: column;
+    height:15%;
+    width: 100%;
+    margin-bottom: 8%;
+}
+
+.input-container{
+    height: 4vh;
+    max-height: 40px;
+    border-color: white;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    border-bottom:1px solid white ;
+    color: rgb(85, 84, 84);
+}
+
+.input-container:focus {
+    border-bottom: 1px solid lightblue;
+}
+
+::placeholder{
+    color: rgb(85, 84, 84);
+}
+
+.login-btn{
+    text-align: center;
+    margin-top: 10px;
+    color: white;
+    height: 3vh;
+    background-color: transparent;
+    border:2px solid whitesmoke;
+    border-radius: 8px;
+    padding: 5px 10px 5px 10px;
+    transition: background-color 0.3s, color 0.3s;
+    min-width: 15vw;
+    min-height:20px ;
+}
+
+.login-btn:hover {
+    background-color: whitesmoke;
+    color: black;
+}
+
+@media (min-width: 768px) {
+    .login-container{
+        min-height: 700px;
+        height: 80%;
+        width: 70%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 5%;
+        
+     
+    }
+
+    .login-detail-container{
+        margin-bottom: 0%;
+    }
+
+    .ticketwise-heading {
+        font-size: 48px;
+    }
+
+    .ticketwise-Para{
+        font-size: 20px;
+        margin-top: 0px;
+        font-family: "Nunito Sans", serif;
+    }
+
+    .login-detail-container{
+        height: 12vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        width: 50%;
+        text-align: center;
+        padding: 5px;
+  
+    }
+
+    .login-form {
+        padding: 1rem;
+    }
+
+    .login-btn {
+        font-size: 0.9rem;
+    }
+    
+    .login-form{
+        border-radius: 10px;
+        height:100%;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        background-color: rgba(255, 255, 255, 0.63);
+        border: 1px solid white;
+        padding: 30px;
+    }
+    
+    
+.heading-login-signup{
+    color:white;
+    font-size: 36px;
+    margin-bottom: 10px;
+    font-family: "Nunito Sans", serif;
+    text-align: center;
+}
+}
