@@ -7,6 +7,7 @@ const ticket = require("../models/ticketsModel")
 dotenv.config()
 
 exports.signUp=async (req,res)=>{
+    try{
     const {name,email,password,mobile,org_name,role}=req.body
     const hashedPassword=await bcrpyt.hash(password,10)
     const newUser=new User({
@@ -24,10 +25,14 @@ exports.signUp=async (req,res)=>{
     }else{
         res.status(500).send({message:"Error creating User"})
     }
+}catch(e){
+    res.status(500).send({message:`Error creating User:${e.message}`})
+}
 
 }
 
 exports.login=async(req,res)=>{
+    try{
     const {email,password}=req.body
     const checkEmail=await User.findOne({email})
     if (checkEmail){
@@ -50,6 +55,9 @@ exports.login=async(req,res)=>{
             }
         }
     }
+}catch(e){
+    res.send({error:e.message})
+}
 }
 
 exports.raiseTicket=async(req,res)=>{

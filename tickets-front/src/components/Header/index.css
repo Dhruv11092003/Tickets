@@ -1,0 +1,58 @@
+.main-header-container{
+    min-height: 3vh;
+    
+    height: auto;
+    width: 100vw;
+}
+
+.detail-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    width: 70%;
+}
+
+.detail-items{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin-right: 20px;
+    font-size: 12px;
+}
+
+.header-container-lg{
+    /* max-height: 100px; */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 5px 25px 15px 15px;
+    box-shadow: 5px 5px 5px #c5c4c4;
+    align-items: center;
+    z-index: 1000;
+    /* background-color: #4db2ffdb; */
+}
+
+.logout-btn{
+    margin-top: 1%;
+    min-height:1vh ;
+    max-height: 20px;
+    padding:5px 10px 5px 10px  ;
+    border-radius: 5px;
+    border: none;
+    background-color: #0083e1e3;
+    color: #ffffff;
+    max-width: 100px;
+}
+
+.logout-btn:hover{
+    
+    color:whitesmoke;
+    border: 2px solid grey;
+}
+
+.ticketwise-logo{
+    min-height: 30px;
+    min-width: 100px;
+    height: 5vh;
+    width: 8vw;
+}

@@ -1,0 +1,27 @@
+.home-container{
+    min-height: 100vh;
+    min-width:100vw;
+    width:auto;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.view-container{
+    /* border: 1px solid black; */
+    margin-left: 10px;
+    min-width: 90vw;
+    width: auto;
+}
+
+.home-view{
+    margin: 0px 15px 15px 0px;
+    padding: 0px 10px 10px 0px;
+    /* border:1px solid black; */
+    height: 98vh;
+    width:auto;
+    display: flex;
+    flex-direction: row;
+    
+}

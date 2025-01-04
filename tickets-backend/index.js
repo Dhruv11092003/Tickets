@@ -1,12 +1,14 @@
 const express=require("express")
 const dotenv=require("dotenv")
 const mongoose=require("mongoose")
+const cors=require('cors')
 const userRoutes=require("./routes/userRoutes")
 const adminRoutes=require("./routes/adminRoutes")
 const superAdminRoutes=require("./routes/superAdminRoutes")
 const app=express()
 app.use(express.json())
 dotenv.config()
+app.use(cors());
 
 mongoose.connect(`${process.env.MONGODB_URI}`)
 .then(()=>(
