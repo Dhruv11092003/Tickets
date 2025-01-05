@@ -15,7 +15,7 @@ const Login = () => {
   const [mobileNo, setMobile] = useState("");
   const [orgName, setOrgName] = useState("");
   const [role, setRole] = useState("");
-  const [message, setMessage] = useState("");
+  // const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   const changeNameValue = (e) => {
@@ -72,7 +72,8 @@ const Login = () => {
         );
       }
     } catch (error) {
-      setMessage(
+      makeToast(
+        "error",
         error.response?.data?.message || "Login failed. Please try again."
       );
     }
@@ -96,7 +97,7 @@ const Login = () => {
           headers: { "Content-Type": "application/json" },
         }
       );
-      if (response.status==201){
+      if (response.status===201){
         makeToast(
           "success",
           ` 
@@ -139,6 +140,7 @@ const Login = () => {
               <div className="form-container">
                 <h1 className="heading-login-signup">Login</h1>
                 <Form onSubmit={sendForLogin} className="login-form">
+                <img src="/ticketwise.png" alt="logo" height={50} width={140} style={{marginBottom:"20px"}}/>
                   <Form.Group className="mb-3 form-item">
                     {/* <Form.Label className="form-label">Email</Form.Label> */}
                     <Form.Control
@@ -180,6 +182,7 @@ const Login = () => {
               <div className="form-container">
                 <h1 className="heading-login-signup">Register</h1>
                 <Form onSubmit={sendForSignup} className="login-form">
+                <img src="/ticketwise.png" alt="logo" height={50} width={140} style={{marginBottom:"20px"}}/>
                   <Form.Group className="mb-3 form-item">
                     <Form.Control
                       className="input-container"

@@ -13,7 +13,6 @@ const Home = () => {
   const token = Cookies.get("jwtToken");
   if (token === undefined) {
     return navigate("/login");
-    return null;
   }
 
   const details = jwtDecode(token);

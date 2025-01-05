@@ -20,7 +20,7 @@ const makeToast = (type, message) => {
   } else if (type === "success") {
     toast.success(message, {
       ...toastConfig,
-      style: { backgroundColor: "green", color: "white" ,display:"flex", flexDirection:"column", justifyContent:"space-evenly",alignItems:"center"},
+      style: { backgroundColor: "green", color: "white" , display:"flex", flexDirection:"column", justifyContent:"space-evenly",alignItems:"center"},
     });
   } else {
     toast.info(message, {

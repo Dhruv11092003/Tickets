@@ -1,4 +1,4 @@
-import { Sidebar, Menu, MenuItem, SubMenu } from "react-pro-sidebar";
+import { Sidebar, Menu, MenuItem} from "react-pro-sidebar";
 import { useState } from "react";
 import { FiAlignJustify } from "react-icons/fi";
 import { FaHome, FaTicketAlt } from "react-icons/fa";
