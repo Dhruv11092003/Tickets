@@ -1,72 +1,201 @@
-.home-container-view{
-    display: flex;
-    flex-direction: column;
-    justify-content:flex-start;
-    min-height: 80vh;
-    height: auto;
-    width:auto;
-    /* border: 1px solid black; */
-    padding: 0px;
+.home-container-view {
+  display: flex;
+  flex-direction: column;
+  /* justify-content:center; */
+  align-items: center;
+  min-height: 80vh;
+  height: auto;
+  width: auto;
+  /* border: 1px solid black; */
+  padding: 0px;
 }
 
-.home-heading-container{
-    width: 86%;
-    min-height: 20%;
-    height: 20vh;
-    color: whitesmoke;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+.search-btn {
+  background: transparent;
+  border: none;
+}
+
+.loader-container {
+  height: 80vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+.main-detail-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: 20px;
+}
+
+.home-heading-container {
+  width: 100%;
+  min-height: 20%;
+  height: 20vh;
+  color: whitesmoke;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+
+  background-image: linear-gradient(
+    to right,
+    #0069f0,
+    #0084fb,
+    #009bff,
+    #00b1ff,
+    #1ec5ff
+  );
+}
+
+.home-heading {
+  font-size: 1.5rem;
+}
+
+.home-para {
+  margin-top: 5px;
+  font-size: 0.8rem;
+}
+
+.welcome-heading {
+  font-size: 20px;
+  margin-top: 5%;
+  margin-right: 10%;
+  color: #009bff;
+  text-align: start;
+}
+
+.details-card {
+  margin-top: 5%;
+  /* align-self: center; */
+  margin-right: 10%;
+  height: 50%;
+  width: 30%;
+  border: 1px solid rgb(169, 169, 169);
+  padding: 10px;
+  border-radius: 5px;
+  min-width: 200px;
+  max-width: 500px;
+}
+
+.details-card > h1 {
+  color: #0084fb;
+  font-size: larger;
+  text-align: start;
+  margin-bottom: 4%;
+}
+
+.detail-label {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.details-card > p {
+  margin-top: 1%;
+  color: #0084fb;
+  font-size: 14px;
+  text-align: start;
+}
+
+/* Manage User */
+.manage-user-container {
+  width: 83vw;
+  list-style: "none";
+  margin: 5px 0px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-container {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.user-search-container {
+  margin: 10px 0px 0px 20px;
+  height: 30px;
+  width: 300px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #0084fb;
+  padding: 3px;
+  border-radius: 5px;
+}
+
+.user-search-Input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  border: none;
+}
+.search-icon {
+  margin-right: 5px;
+  color: #0084fb;
+  font-size: 18px;
+}
+
+@media screen and (min-width: 700px) {
+  .manage-user-container {
+    width: 100vw;
+  }
+
+  .home-heading-container {
+    padding-left: 0;
     align-items: center;
-    
-    background-image: linear-gradient(to right, #0069f0, #0084fb, #009bff, #00b1ff, #1ec5ff);
-}
+  }
 
-.home-heading{
-    font-size: 1.5rem;
-}
-
-.home-para{
-    margin-top: 5px;
-    font-size: 0.8rem;
-}
-
-.welcome-heading{
-    font-size: 20px;
-    margin-top: 5%;
-    margin-right: 10%;
-    color: #009bff;
+  .welcome-heading {
     text-align: center;
-}
+  }
 
-.details-card{
-    margin-top: 5%;
-    align-self:center;
-    margin-right: 10%;
-    height: 50%;
-    width: 60%;
-    border: 1px solid rgb(169, 169, 169);
-    padding: 10px;
-    border-radius: 5px;
-    min-width: 200px;
-    max-width: 500px;
-}
+  .filter-container {
+    width: 100%;
+    flex-direction: row;
+  }
 
-.details-card>h1{
-    color: #0084fb;
-    font-size: larger;
+  .details-card > h1 {
     text-align: center;
-    margin-bottom: 4%;
-}
-
-.detail-label{
-font-weight: bold;
-font-size: 18px;
-}
-
-.details-card>p{
-    margin-top: 1%;
-    color: #0084fb;
-    font-size: 14px;
+  }
+  .details-card > p {
     text-align: center;
+  }
+  .details-card {
+    align-self: center;
+  }
+}
+
+/* Assign Tickets */
+.assign-ticket-container {
+  width: 80vw;
+  list-style: "none";
+  margin: 5px 0px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (min-width: 700px) {
+  .assign-ticket-container {
+    width: 95%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    align-items: center;
+  }
 }

@@ -1,6 +1,6 @@
 .home-container{
     min-height: 100vh;
-    min-width:100%;
+    min-width:100vw;
     width:auto;
     height: auto;
     display: flex;
@@ -9,10 +9,11 @@
 }
 
 .view-container{
-    /* border: 1px solid black; */
+    /* border: 5px solid blue; */
     /* margin-left: 10px; */
     min-width: 100vw;
     width: auto;
+
 }
 
 .home-view{
@@ -20,7 +21,7 @@
     padding: 0px 10px 0px 0px;
     /* border:1px solid black; */
     height: 98vh;
-    width:auto;
+    width:100vw;
     display: flex;
     flex-direction: row;
     

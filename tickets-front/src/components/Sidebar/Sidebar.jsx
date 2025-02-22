@@ -1,11 +1,11 @@
 import { Sidebar, Menu, MenuItem} from "react-pro-sidebar";
 import { useState } from "react";
 import { FiAlignJustify } from "react-icons/fi";
-import { FaHome, FaTicketAlt } from "react-icons/fa";
 import { RxCross2 } from "react-icons/rx";
 import "./index.css"
 import { Link } from "react-router-dom";
-const SidebarComponent = () => {
+const SidebarComponent = (props) => {
+  const {items}=props
   const [collapsed,setCollapsed]=useState(true)
   return (
     <>
@@ -14,8 +14,11 @@ const SidebarComponent = () => {
         {collapsed ? <FiAlignJustify className="icon-sidebar"/> : <RxCross2 className="icon-sidebar"/>}
       </button>
         <Menu>
-          <MenuItem className="menu-item" component={<Link to="/dashboard" />} icon={<FaHome className="icon"/>}>Dashboard</MenuItem>
-          <MenuItem className="menu-item" icon={< FaTicketAlt  className="icon"/>}>Tickets</MenuItem>
+          {
+            items.map((item, index) =>(
+              <MenuItem className="menu-item" component={<Link to={item.route} />} icon={item.icon}>{item.name}</MenuItem>
+            ))
+          }
         </Menu>
       </Sidebar>
     </>

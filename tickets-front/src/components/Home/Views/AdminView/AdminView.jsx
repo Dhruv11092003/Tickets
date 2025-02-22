@@ -15,13 +15,15 @@ const AdminView = () => {
             <h1 className="home-heading">Welcome To TicketWise!</h1>
             <p className="home-para">The bridge to seamless issue handling</p>
           </div>
-          <h1 className="welcome-heading">Welcome, {details.name}</h1>
-          <div className="details-card">
-            <h1>Your Account Details</h1>
-            <p className="detail-label">Designation</p>
-            <p> {details.role} </p>
-            <p className="detail-label">Organisation </p>
-            <p>{details.org_name}</p>
+          <div style={{marginTop:"50px"}}>
+            <h1 className="welcome-heading">Welcome, {details.name}</h1>
+            <div className="details-card">
+              <h1>Your Account Details</h1>
+              <p className="detail-label">Designation</p>
+              <p> {details.role} </p>
+              <p className="detail-label">Organisation </p>
+              <p>{details.org_name}</p>
+            </div>
           </div>
         </div>
       ) : (

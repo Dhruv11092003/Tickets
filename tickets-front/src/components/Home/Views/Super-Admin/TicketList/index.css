@@ -1,0 +1,74 @@
+.ticket-list-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    /* border: 1px dotted #0083e1e3; */
+    width: 50%;
+    height:200px;
+    min-height: 150px;
+    min-width: 250px;
+    max-width: 400px;
+    min-height: 10vh;
+    padding: 10px;
+    list-style-type:none;
+    gap: 20px;
+    border-radius: 4px;
+    margin-top: 10px;
+    background: linear-gradient(0deg, rgba(172, 171, 171, 0.9), rgba(255, 255, 255, 0.637)), url('../../../../../../public/tickets-back.png');
+    /* background:url("../../../../../../public/tickets-back.png") no-repeat; */
+    background-size: cover;
+    
+  }
+  
+  .user-detail-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  h5{
+      color:#0083e1e3;
+  }
+  
+  .active_disable_btn {
+      height: 20px;
+      width: 50px;
+    border: 1px solid white;
+    padding: 5px 10px 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .user-item-btn-container{
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+  }
+  .more-details-btn{
+      font-size: 18px;
+      border:none;
+      background: transparent;
+      color:#0083e1e3;
+  }
+  
+  .extend-details-container{
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+  }
+  
+  @media screen and (min-width:768px) {
+      .ticket-list-item {
+          width: 80%;
+      }
+  
+      .extend-details-container{
+          height: auto;
+          width: 100%;
+          flex-direction: row;
+          justify-content: space-evenly;
+          flex-wrap: wrap;
+      }
+  }
