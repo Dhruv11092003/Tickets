@@ -96,7 +96,7 @@ exports.getAllTicketsOfUser=async(req,res)=>{
         const getTickets = await ticket.find({ "raisedBy.userId":user_id});
         console.log(getTickets)
         if (getTickets){
-            res.status(200).send({tickets:{getTickets}})
+            res.status(200).send({tickets:getTickets})
         }
     }catch(e){
         res.status(500).send({error:e.message})

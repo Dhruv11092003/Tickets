@@ -61,9 +61,8 @@ exports.getAllUsers = async (req, res) => {
 
 exports.assignTicketToAdmin = async (req, res) => {
   try {
-    const { user } = req;
-    const { ticketId, userId } = req.body;
-    const getUser = await User.findOne({ user_id: userId });
+    const { ticketId, adminId } = req.body;
+    const getUser = await User.findOne({ user_id: adminId });
     const getTicket = await ticket.findOne({ ticketId: ticketId });
     const currentDate = Date.now();
     if (getUser) {

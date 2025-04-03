@@ -2,24 +2,20 @@ import axios from "axios";
 import "./index.css";
 import { useState, useEffect } from "react";
 import getToken from "../../../CustomHooks/getToken";
-import TicketList from "./TicketList/NewTicketList";
-import InProgessTicketList from "./TicketList/InProgressTicketList";
 import makeToast from "../../../Toast/toast";
 import ClipLoader from "react-spinners/ClipLoader";
-import ResolvedTicketList from "./TicketList/ResolvedTickets";
 
-const AssignTickets = () => {
+const YourTicketsComponent = () => {
   const [loading, setLoading] = useState(false);
-  const [admins, setAdmins] = useState([]);
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
-    const token = getToken()
+    const token = getToken();
     const fetchTickets = async (token) => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URI}/s-admin/getAllTickets`,
+          `${process.env.REACT_APP_BASE_URI}/user/getAllTicketsOfUser`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -34,47 +30,32 @@ const AssignTickets = () => {
         setLoading(false);
       }
     };
-    
+
     fetchTickets(token);
   }, []);
 
   return (
-    <div>
+    <div className="home-container-view">
       <div className="home-heading-container">
-        <h1 className="home-heading">Assign Tickets</h1>
-        <p className="home-para">Assign Tickets To Admin For Resolution</p>
+        <h1 className="home-heading">Your Tickets</h1>
+        <p className="home-para">View your raised tickets below</p>
       </div>
       {loading ? (
         <div className="loader-container">
           <ClipLoader color={"#0083e1e3"} loading={loading} size={50} />
         </div>
       ) : (
-        <div>
-          <h1>New Tickets</h1>
         <ul className="assign-ticket-container">
           {tickets.map((ticket) => (
-          (ticket.status==="Created") &&
-            <TicketList key={ticket._id} ticket={ticket} />
+            <li key={ticket._id} className="ticket-item">
+              <h2>{ticket.title}</h2>
+              <p>{ticket.description}</p>
+            </li>
           ))}
         </ul>
-        <h1>In Progress</h1>
-        <ul className="assign-ticket-container">
-          {tickets.map((ticket) => (
-          (ticket.status==="In Progress") &&
-            <InProgessTicketList key={ticket._id} ticket={ticket} />
-          ))}
-        </ul>
-        <h1>Resolved</h1>
-        <ul className="assign-ticket-container">
-          {tickets.map((ticket) => (
-          (ticket.status==="Resolved") &&
-            <ResolvedTicketList key={ticket._id} ticket={ticket} />
-          ))}
-        </ul>
-        </div>
       )}
     </div>
   );
 };
 
-export default AssignTickets;
+export default YourTicketsComponent;

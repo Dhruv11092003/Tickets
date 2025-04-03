@@ -28,6 +28,8 @@
     justify-content: space-between;
   }
   
+
+  
   h5{
       color:#0083e1e3;
   }
@@ -58,7 +60,111 @@
       flex-direction: column;
       gap: 20px;
   }
+
+  .ticket-info-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+/* General Popup Styles */
+.popup-content {
+    background: rgb(255, 255, 255);
+    padding: 20px;
+    width: 350px;
+    max-width:600px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    position: relative;
+  }
   
+  /* Close Button */
+  .popup-content .close-btn {
+    background: red;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+
+  }
+  
+  .popup-content .close-btn:hover {
+    background: darkred;
+  }
+  
+  /* Form Styling */
+  .set-admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+    padding: 15px;
+  }
+  
+  .set-admin-form label {
+    font-weight: bold;
+  }
+  
+  .set-admin-form select {
+    width: 95%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+
+  .assign-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 12px;
+    margin-top: 10px;
+    width: auto;
+  }
+  
+  
+  /* Assign Button - Centered Below Select */
+  .set-admin-form .assign-btn {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    margin-top: 10px;
+    width: 90%;
+  }
+  
+  .set-admin-form .assign-btn:hover {
+    background-color: #218838;
+  }
+  
+  /* Popup Overlay */
+  .popup-overlay {
+    background: rgba(0, 0, 0, 0.4);
+  }
+  
+  .assign-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+  
+  .ticket-btn-container{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    gap:10px;
+    align-items: flex-start;
+  }
   @media screen and (min-width:768px) {
       .ticket-list-item {
           width: 80%;

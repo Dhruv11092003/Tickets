@@ -7,7 +7,7 @@ import UserView from "../Home/Views/UserView/UserView";
 import Header from "../Header";
 import Sidebar from "../Sidebar/Sidebar";
 import "./index.css";
-import { FaHome, FaTicketAlt ,FaUserAlt} from "react-icons/fa";
+import { FaHome, FaTicketAlt, FaUserAlt } from "react-icons/fa";
 import { RxDashboard } from "react-icons/rx";
 
 const Home = () => {
@@ -19,12 +19,46 @@ const Home = () => {
 
   const SidebarItems = [
     {
-      user: {},
-      admin: [{name:"Dashboard",route:"/admin/dashboard",icon:<FaHome className="icon"/> }],
+      user: [
+        {
+          name: "Dashboard",
+          route: "/user/dashboard",
+          icon: <FaHome className="icon" />,
+        },
+        {
+          name: "Raise Ticket",
+          route: "/user/raiseTicket",
+          icon: <FaTicketAlt className="icon" />,
+        },
+        {
+          name: "Information",
+          route: "/user/yourTickets",
+          icon: <FaUserAlt className="icon" />,
+        },
+      ],
+      admin: [
+        {
+          name: "Dashboard",
+          route: "/admin/dashboard",
+          icon: <FaHome className="icon" />,
+        },
+      ],
       superAdmin: [
-        { name: "Dashboard", route: "/s-admin/dashboard", icon:<FaHome className="icon"/> },
-        { name: "User Management", route: "/s-admin/manageUser",  icon:<FaUserAlt className="icon"/> },
-        { name: "Assign Tickets", route: "/s-admin/assignTickets",icon:<FaTicketAlt className="icon"/> },
+        {
+          name: "Dashboard",
+          route: "/s-admin/dashboard",
+          icon: <FaHome className="icon" />,
+        },
+        {
+          name: "User Management",
+          route: "/s-admin/manageUser",
+          icon: <FaUserAlt className="icon" />,
+        },
+        {
+          name: "Assign Tickets",
+          route: "/s-admin/assignTickets",
+          icon: <FaTicketAlt className="icon" />,
+        },
       ],
     },
   ];
