@@ -7,7 +7,7 @@ import ClipLoader from "react-spinners/ClipLoader";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
 
-const YourTicketsComponent = () => {
+const AssignedTickets = () => {
   const [loading, setLoading] = useState(false);
   const [tickets, setTickets] = useState([]);
 
@@ -17,7 +17,7 @@ const YourTicketsComponent = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          `${process.env.REACT_APP_BASE_URI}/user/getAllTicketsOfUser`,
+          `${process.env.REACT_APP_BASE_URI}/admin/getAssignedTickets`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }
@@ -38,9 +38,10 @@ const YourTicketsComponent = () => {
 
   return (
     <div>
+      {/*Styling is used directly from the UserView index.css file*/}
       <div className="home-heading-container">
-        <h1 className="home-heading">Your Tickets</h1>
-        <p className="home-para">View your raised tickets below</p>
+        <h1 className="home-heading">Assigned Tickets</h1>
+        <p className="home-para">View Tickets Assigned to you below</p>
       </div>
       {loading ? (
         <div className="loader-container">
@@ -81,7 +82,6 @@ const YourTicketsComponent = () => {
                   }
                   className="popup-content"
                   modal
-                 
                 >
                   {(close) => (
                     <div className="ticket-modal">
@@ -101,15 +101,22 @@ const YourTicketsComponent = () => {
                           <p>{ticket.ticketId}</p>
                         </div>
                         <div className="modal-field">
-                          <strong>Title:</strong> 
+                          <strong>Title:</strong>
                           <p>{ticket.title}</p>
                         </div>
                         <div className="modal-field">
                           <strong>Description:</strong>
-                          <p style={{ width: "60%", whiteSpace: "normal", wordBreak: "break-word", overflowWrap: "break-word", margin: 0 }}>
-  {ticket.description}
-</p>
-
+                          <p
+                            style={{
+                              width: "60%",
+                              whiteSpace: "normal",
+                              wordBreak: "break-word",
+                              overflowWrap: "break-word",
+                              margin: 0,
+                            }}
+                          >
+                            {ticket.description}
+                          </p>
                         </div>
                         <div className="modal-field">
                           <strong>Raised By (User ID):</strong>
@@ -140,7 +147,11 @@ const YourTicketsComponent = () => {
                           <strong>Last Updated:</strong>
                           <p>{new Date(ticket.updatedAt).toLocaleString()}</p>
                         </div>
-
+                        <div style={{width:"100%",display:"flex", flexDirection:"row",justifyContent:"center"}}>
+                          <button type="button" className="timeline-step" style={{backgroundColor:"darkblue",color:"white"}}>
+                            Schedule a Meeting
+                          </button>
+                        </div>
                         {/* Timeline Status */}
                         <div className="timeline-container">
                           <h4>Ticket Status Timeline</h4>
@@ -188,4 +199,4 @@ const YourTicketsComponent = () => {
   );
 };
 
-export default YourTicketsComponent;
+export default AssignedTickets;

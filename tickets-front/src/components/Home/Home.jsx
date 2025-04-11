@@ -42,6 +42,16 @@ const Home = () => {
           route: "/admin/dashboard",
           icon: <FaHome className="icon" />,
         },
+        {
+          name: "Assigned Tickets",
+          route: "/admin/assignedTickets",
+          icon: <FaTicketAlt className="icon" />,          
+        },
+        {
+          name:"My Meetings",
+          route: "/admin/myMeetings",
+          icon:<FaUserAlt className="icon" />
+        }
       ],
       superAdmin: [
         {

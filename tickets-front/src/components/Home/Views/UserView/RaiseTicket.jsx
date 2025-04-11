@@ -51,7 +51,7 @@ const RaiseTicket = () => {
       }
   };
   return (
-    <div >
+    <div className="main-raise-container" >
     <div className="home-heading-container">
       <h1 className="home-heading">Raise Ticket</h1>
       <p className="home-para">Raise Ticket for Your Issues</p>

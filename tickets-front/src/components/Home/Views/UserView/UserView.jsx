@@ -1,11 +1,11 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
-import Cookies from "js-cookie";
+import getToken from "../../../CustomHooks/getToken";
 import "./index.css";
 
 const UserView = () => {
   const location = useLocation();
-  const token = Cookies.get("jwtToken");
+  const token = getToken();
   const details = jwtDecode(token);
 
   return (

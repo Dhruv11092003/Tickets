@@ -13,7 +13,7 @@ exports.getAllTicketsAssigned = async (req, res) => {
       "assignedTo.userId": user.user_id,
     });
     if (getTickets) {
-      res.status(200).send({ tickets: { getTickets } });
+      res.status(200).send({ tickets:  getTickets  });
     }
   } catch (e) {
     res.status(500).send({ error: e.message });

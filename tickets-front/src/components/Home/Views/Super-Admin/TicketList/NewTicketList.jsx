@@ -4,7 +4,9 @@ import { useState } from "react";
 import Popup from "reactjs-popup";
 import makeToast from "../../../../Toast/toast";
 import getToken from "../../../../CustomHooks/getToken";
+import { jwtDecode } from "jwt-decode";
 import "reactjs-popup/dist/index.css";
+
 
 const TicketList = ({ ticket }) => {
   const [admins, setAdmins] = useState([]);
@@ -33,10 +35,14 @@ const TicketList = ({ ticket }) => {
   // Handle Admin Assignment
   const handleAssignAdmin = async (e, close) => {
     e.preventDefault();
+    console.log(admin)
     if (!admin) return;
     try {
-      const payload={ ticketId: ticket.ticketId, adminId: admin }
       const token = getToken();
+      const details=jwtDecode(token)
+
+      const payload={ ticketId: ticket.ticketId, adminId: admin ,superAdminId:details.user_id}
+      
       await axios.post(
         `${process.env.REACT_APP_BASE_URI}/s-admin/assignTicketToAdmin`,
         payload,
@@ -98,7 +104,7 @@ const TicketList = ({ ticket }) => {
                   >
                     <option value="">-- Select Admin --</option>
                     {admins.map((adminItem) => (
-                      <option key={adminItem._id} value={adminItem._id}>
+                      <option key={adminItem.user_id} value={adminItem.user_id}>
                         {adminItem.name}
                       </option>
                     ))}

@@ -13,6 +13,7 @@ import AdminDashboard from "./components/Home/Views/AdminView/AdminDashboard";
 import RaiseTicket from "./components/Home/Views/UserView/RaiseTicket"
 import UserDashboard from "./components/Home/Views/UserView/UserDashboard"
 import YourTicketsComponent from "./components/Home/Views/UserView/YourTickets";
+import AssignedTickets from "./components/Home/Views/AdminView/AssignedTickets"
 
 function App() {
   return (
@@ -33,8 +34,8 @@ function App() {
           
           <Route path="/admin" element={<PrivateRoute allowedRoles={["Admin"]}/>}>
             <Route path="dashboard" element={<AdminDashboard />} />
-            {/* <Route path="manageUser" element={<ManageUser/>}/>
-            <Route path="assignTickets" element={<AssignTickets/>}/> */}
+            <Route path="AssignedTickets" element={<AssignedTickets/>}/>
+            <Route path="assignTickets" element={<AssignTickets/>}/>
           </Route>
 
           <Route path="/user" element={<PrivateRoute allowedRoles={["User"]}/>}>

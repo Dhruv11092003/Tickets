@@ -61,23 +61,23 @@ exports.getAllUsers = async (req, res) => {
 
 exports.assignTicketToAdmin = async (req, res) => {
   try {
-    const { ticketId, adminId } = req.body;
-    const getUser = await User.findOne({ user_id: adminId });
+    const { ticketId, adminId, superAdminId } = req.body;
+    const getAdmin = await User.findOne({ user_id: adminId });
     const getTicket = await ticket.findOne({ ticketId: ticketId });
     const currentDate = Date.now();
-    if (getUser) {
-      if (getUser.assignedTickets.length < 10) {
+    if (getAdmin) {
+      if (getAdmin.assignedTickets.length < 10) {
         const assignTicket = await User.findOneAndUpdate(
-          { user_id: userId },
+          { user_id: adminId },
           {
             $push: {
-              assignedTickets: { ticketId: ticketId, assignedby: userId },
+              assignedTickets: { ticketId: ticketId, assignedby: superAdminId },
             },
           }
         );
         if (assignTicket) {
           const addMessageToAdmin = await User.findOneAndUpdate(
-            { user_id: userId },
+            { user_id: adminId },
             {
               $push: {
                 messages: {
@@ -96,8 +96,8 @@ exports.assignTicketToAdmin = async (req, res) => {
                 messages: {
                   title: "Admin Assigned For the Raised Ticket",
                   description: `Ticket assigned to Admin with:
-                        userId:${getUser.user_id}
-                        name:${getUser.name}`,
+                        userId:${adminId}
+                        name:${getAdmin.name}`,
                   Date: currentDate,
                 },
               },
@@ -108,8 +108,8 @@ exports.assignTicketToAdmin = async (req, res) => {
             {
               status: "In Progress",
               assignedTo: {
-                userId: userId,
-                name: getUser.name,
+                userId: adminId,
+                name: getAdmin.name,
                 assignedOn: currentDate,
               },
             }
@@ -117,7 +117,7 @@ exports.assignTicketToAdmin = async (req, res) => {
           res
             .status(200)
             .send({
-              message: `Ticket assigned to Admin with:{userId:${getUser.user_id},Admin-Name:${getUser.name}}`,
+              message: `Ticket assigned to Admin with:{userId:${getAdmin.user_id},Admin-Name:${getAdmin.name}}`,
             });
         }
       } else {
