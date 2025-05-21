@@ -1,0 +1,31 @@
+.popup-content{
+    position: absolute;
+    min-width: 350px;
+    max-width: 400px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  }
+
+  .button{
+    width: fit-content;
+    height:20px;
+    min-width:40px;
+    margin: 10px;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  .yes-btn{
+    background-color:rgba(0, 128, 0, 0.685);
+  }
+  
+  .no-btn{
+    background-color: red;
+  }
+
+  .popup-inner{
+    overflow-y: auto;
+    max-height: 800px;
+    max-width: 100%;
+  }

@@ -6,7 +6,7 @@ const ticketSchema = mongoose.Schema(
     ticketId: { type: String, default: () => uuid.generate() },
     status: {
       type: String,
-      enum: ["Created", "In Progress", "Resolved"],
+      enum: ["Created", "In Progress", "Resolved","Re-Created","On Hold", "Disabled"],
       default: "Created",
     },
     title: { type: String, required: true },

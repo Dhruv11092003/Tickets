@@ -10,7 +10,6 @@ import ResolvedTicketList from "./TicketList/ResolvedTickets";
 
 const AssignTickets = () => {
   const [loading, setLoading] = useState(false);
-  const [admins, setAdmins] = useState([]);
   const [tickets, setTickets] = useState([]);
 
   useEffect(() => {
@@ -50,21 +49,21 @@ const AssignTickets = () => {
         </div>
       ) : (
         <div>
-          <h1>New Tickets</h1>
+          <h1 className="ticket-type-heading">New Tickets</h1>
         <ul className="assign-ticket-container">
           {tickets.map((ticket) => (
           (ticket.status==="Created") &&
             <TicketList key={ticket._id} ticket={ticket} />
           ))}
         </ul>
-        <h1>In Progress</h1>
+        <h1 className="ticket-type-heading">In Progress</h1>
         <ul className="assign-ticket-container">
           {tickets.map((ticket) => (
           (ticket.status==="In Progress") &&
             <InProgessTicketList key={ticket._id} ticket={ticket} />
           ))}
         </ul>
-        <h1>Resolved</h1>
+        <h1 className="ticket-type-heading">Resolved</h1>
         <ul className="assign-ticket-container">
           {tickets.map((ticket) => (
           (ticket.status==="Resolved") &&

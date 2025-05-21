@@ -7,7 +7,17 @@
     box-sizing: content-box;
 }
 
-
+.ticketwise-features {
+    text-align: left;
+    padding-left: 1.5rem; /* Indent bullets */
+    list-style-position: outside;
+    margin: 0;
+  }
+  
+  .ticketwise-features li {
+    margin-bottom: 0.75rem; /* Space between items */
+    line-height: 1.6;
+  }
 
 .login-background{
     min-height:100vh;

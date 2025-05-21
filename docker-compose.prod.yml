@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  backend:
+    image: dhruv11092003/ticketwise-backend:latest
+    ports:
+      - "5000:5000"
+    environment:
+      - MONGO_URI=mongodb+srv://dhruvkulshrestha11:vrindaDhruv%4012@growthx.eptvn.mongodb.net/Tickets
+      - PORT=5000
+      - SECRET_KEY=ABCDEFG
+    networks:
+      - ticketwise-network
+    restart: always
+
+  frontend:
+    image: dhruv11092003/ticketwise-frontend:latest
+    ports:
+      - "80:80"
+    networks:
+      - ticketwise-network
+    restart: always
+
+networks:
+  ticketwise-network:
+    driver: bridge

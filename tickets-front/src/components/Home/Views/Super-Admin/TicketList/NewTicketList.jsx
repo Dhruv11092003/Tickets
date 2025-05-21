@@ -112,7 +112,7 @@ const TicketList = ({ ticket }) => {
                   <button type="submit" className="assign-btn" disabled={!admin}>
                     Assign Admin
                   </button>
-                  <button type="button" className="close-btn" onClick={close}>
+                  <button type="button" className="button no-btn" onClick={close}>
                     Close
                   </button>
                 </form>

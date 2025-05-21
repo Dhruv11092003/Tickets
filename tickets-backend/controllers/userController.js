@@ -55,6 +55,7 @@ exports.login=async(req,res)=>{
             }
         }
     }
+    console.log("check")
 }catch(e){
     res.send({error:e.message})
 }
@@ -87,14 +88,27 @@ exports.raiseTicket=async(req,res)=>{
         res.status(500).send({message:"Error Raising Ticket",error:e.message})
     }
 }
-
+exports.getSingleUserDetails = async (req, res) => {
+    try {
+      const { userId } = req.body; // Fix: Extract from req.body
+      const getUser = await User.findOne({ user_id: userId });
+  
+      if (getUser) {
+        res.send({ user: getUser, messages: getUser.messages });
+      } else {
+        res.status(404).json({ error: "User not found" });
+      }
+    } catch (e) {
+      res.status(500).json({ error: e.message }); // Fix: Correct error handling
+    }
+  };
+  
 exports.getAllTicketsOfUser=async(req,res)=>{
     try{
         const {user}=req
         const {user_id}=user
-        console.log(typeof(user_id))
+        
         const getTickets = await ticket.find({ "raisedBy.userId":user_id});
-        console.log(getTickets)
         if (getTickets){
             res.status(200).send({tickets:getTickets})
         }
@@ -103,7 +117,7 @@ exports.getAllTicketsOfUser=async(req,res)=>{
     }
 }
 
-exports.disableTicket=async(req,res)=>{
+exports.resolveTicket=async(req,res)=>{
     try{
     const {ticketId}=req.params
     const disableTicket=await ticket.findOneAndUpdate({ticketId:ticketId},{status:"Resolved"})

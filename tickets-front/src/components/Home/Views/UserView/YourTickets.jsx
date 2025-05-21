@@ -6,6 +6,7 @@ import makeToast from "../../../Toast/toast";
 import ClipLoader from "react-spinners/ClipLoader";
 import Popup from "reactjs-popup";
 import "reactjs-popup/dist/index.css";
+import PopupComponent from "../../../PopupComponent/PopupComponent";
 
 const YourTicketsComponent = () => {
   const [loading, setLoading] = useState(false);
@@ -27,7 +28,7 @@ const YourTicketsComponent = () => {
         }
       } catch (e) {
         console.error(e.message);
-        makeToast("error", `Something Went Wrong ${e}`);
+        makeToast("error", `Something Went Wrong ${e.message}`);
       } finally {
         setLoading(false);
       }
@@ -35,6 +36,51 @@ const YourTicketsComponent = () => {
 
     fetchTickets(token);
   }, []);
+
+  const resolveTicket = async (ticketId) => {
+    try {
+      setLoading(true);
+      const token = getToken();
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URI}/user/resolveTicket/${ticketId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      if (response.status === 200) {
+        // Handle success if needed
+        window.location.reload();
+        makeToast("success", "Ticket resolved successfully.");
+      }
+    } catch (e) {
+      console.error(e.message);
+      window.location.reload();
+      makeToast("error", `Something went wrong: ${e.message}`);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const invokeTicket = async (ticketId) => {
+    try {
+      const token = getToken();
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URI}/user/invokeTicket/${ticketId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+      if (response.status === 200) {
+        // Handle success if needed
+        window.location.reload();
+        makeToast("success", "Ticket resolved successfully.");
+      }
+    } catch (e) {
+      console.error(e.message);
+      window.location.reload();
+      makeToast("error", `Something went wrong: ${e.message}`);
+    }
+  };
 
   return (
     <div>
@@ -69,19 +115,18 @@ const YourTicketsComponent = () => {
               <div>
                 <Popup
                   trigger={
-                    <h5
+                    <button
+                      className="button"
                       style={{
-                        borderBottom: "1px solid #0004ff",
-                        color: "#0004ff",
-                        cursor: "pointer",
+                        backgroundColor: "transparent",
                       }}
+                      type="button"
                     >
                       Show Details
-                    </h5>
+                    </button>
                   }
                   className="popup-content"
                   modal
-                 
                 >
                   {(close) => (
                     <div className="ticket-modal">
@@ -101,15 +146,22 @@ const YourTicketsComponent = () => {
                           <p>{ticket.ticketId}</p>
                         </div>
                         <div className="modal-field">
-                          <strong>Title:</strong> 
+                          <strong>Title:</strong>
                           <p>{ticket.title}</p>
                         </div>
                         <div className="modal-field">
                           <strong>Description:</strong>
-                          <p style={{ width: "60%", whiteSpace: "normal", wordBreak: "break-word", overflowWrap: "break-word", margin: 0 }}>
-  {ticket.description}
-</p>
-
+                          <p
+                            style={{
+                              width: "60%",
+                              whiteSpace: "normal",
+                              wordBreak: "break-word",
+                              overflowWrap: "break-word",
+                              margin: 0,
+                            }}
+                          >
+                            {ticket.description}
+                          </p>
                         </div>
                         <div className="modal-field">
                           <strong>Raised By (User ID):</strong>
@@ -180,6 +232,53 @@ const YourTicketsComponent = () => {
                   )}
                 </Popup>
               </div>
+              {ticket.status === "In Progress" ||
+              ticket.status === "Created" ? (
+                <PopupComponent
+                  trigger={
+                    <div>
+                      <button type="button" className="button">
+                        Resolve Ticket
+                      </button>
+                    </div>
+                  }
+                  content={
+                    <div>
+                      <h4>Do you want to resolve this ticket?</h4>
+                      <button
+                        type="button"
+                        className="button yes-btn"
+                        onClick={() => resolveTicket(ticket.ticketId)}
+                      >
+                        Yes
+                      </button>
+                    </div>
+                  }
+                />
+              ) : (
+                <PopupComponent
+                  trigger={
+                    <div>
+                      <button type="button" className="button">
+                        Invoke Ticket
+                      </button>
+                    </div>
+                  }
+                  content={
+                    <div>
+                      <h4>Do you want to invoke this ticket?</h4>{" "}
+                      {/* Changed message to match intent */}
+                      <button
+                        type="button"
+                        className="button yes-btn"
+                        onClick={() => invokeTicket(ticket.ticketId)}
+                      >
+                        Yes
+                      </button>
+                    </div>
+                  }
+                />
+              )}
             </li>
           ))}
         </ul>

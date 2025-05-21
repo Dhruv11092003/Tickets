@@ -218,6 +218,23 @@ height: auto;
   justify-content: center;
 }
 
+.button{
+  width: fit-content;
+  height:20px;
+  min-width:40px;
+  margin: 10px;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+}
+.yes-btn{
+  background-color:rgba(0, 128, 0, 0.685);
+}
+
+.no-btn{
+  background-color: red;
+}
+
 @media screen and (min-width: 700px) {
   .home-heading-container {
     padding-left: 0;
