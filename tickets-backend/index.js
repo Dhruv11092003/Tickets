@@ -19,7 +19,7 @@ app.use(
   })
 );
 app.use(express.json());
-
+// console.log(process.env.MONGODB_URI)
 mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
