@@ -1,8 +1,6 @@
 const express=require('express')
-const path = require("path");
 const router=express.Router()
 const auth=require('../auth')
-const Ticket = require("../models/ticketsModel");
 const {signUp,login,raiseTicket,getAllTicketsOfUser,resolveTicket,invokeTicket,getSingleUserDetails}=require("../controllers/userController")
 
 router.post("/register",signUp)

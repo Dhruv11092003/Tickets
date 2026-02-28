@@ -1,65 +1,82 @@
-const bcrpyt=require("bcrypt")
-const User=require("../models/usersModel")
-const dotenv=require("dotenv")
-const jwt=require("jsonwebtoken")
-const ticket = require("../models/ticketsModel")
+const bcrpyt = require("bcrypt");
+const User = require("../models/usersModel");
+const dotenv = require("dotenv");
+const jwt = require("jsonwebtoken");
+const ticket = require("../models/ticketsModel");
 
-dotenv.config()
+dotenv.config();
 
-exports.signUp=async (req,res)=>{
-    try{
-    const {name,email,password,mobile,org_name,role}=req.body
-    const hashedPassword=await bcrpyt.hash(password,10)
-    const newUser=new User({
-        name,
-        email,
-        password:hashedPassword,
-        mobile,
-        org_name,
-        role
-    })
+const normalizeEmail = (email = "") => email.trim().toLowerCase();
+const normalizeText = (value = "") => value.trim();
 
-    const response=await newUser.save()
-    if (response){
-        res.status(201).send({message:"User Registered Successfully! Wait for Admin's Approval"})
-    }else{
-        res.status(500).send({message:"Error creating User"})
+const updateTicketStatus = async (ticketId, status) => {
+  return ticket.findOneAndUpdate({ ticketId }, { status });
+};
+
+exports.signUp = async (req, res) => {
+  try {
+    const { name, email, password, mobile, org_name, role } = req.body;
+    const hashedPassword = await bcrpyt.hash(password, 10);
+    const newUser = new User({
+      name: normalizeText(name),
+      email: normalizeEmail(email),
+      password: hashedPassword,
+      mobile: normalizeText(mobile),
+      org_name: normalizeText(org_name),
+      role,
+    });
+
+    const response = await newUser.save();
+    if (response) {
+      return res
+        .status(201)
+        .send({ message: "User Registered Successfully! Wait for Admin's Approval" });
     }
-}catch(e){
-    res.status(500).send({message:`Error creating User:${e.message}`})
-}
 
-}
-
-exports.login=async(req,res)=>{
-    try{
-    const {email,password}=req.body
-    const checkEmail=await User.findOne({email})
-    if (checkEmail){
-        const checkPassword=await bcrpyt.compare(password,checkEmail.password)
-        if (checkPassword){
-            if (checkEmail.status==="Disabled"){
-                res.status(401).send({message:"Approval Pending! Contact Admin!"})
-            }else{
-                const payload={
-                    name:checkEmail.name,
-                    user_id:checkEmail.user_id,
-                    mobile:checkEmail.mobile,
-                    role:checkEmail.role,
-                    org_name:checkEmail.org_name,
-                    email:checkEmail.email
-                }
-                const jwtToken=await jwt.sign(payload,process.env.SECRET_KEY)
-                res.send({jwtToken})
-
-            }
-        }
+    return res.status(500).send({ message: "Error creating User" });
+  } catch (e) {
+    if (e.code === 11000) {
+      return res.status(409).send({ message: "Email already exists" });
     }
-    console.log("check")
-}catch(e){
-    res.send({error:e.message})
-}
-}
+    return res.status(500).send({ message: `Error creating User:${e.message}` });
+  }
+};
+
+exports.login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const normalizedEmail = normalizeEmail(email);
+    const checkEmail = await User.findOne({ email: normalizedEmail });
+
+    if (!checkEmail) {
+      return res.status(401).send({ message: "Invalid email or password" });
+    }
+
+    const checkPassword = await bcrpyt.compare(password, checkEmail.password);
+    if (!checkPassword) {
+      return res.status(401).send({ message: "Invalid email or password" });
+    }
+
+    if (checkEmail.status === "Disabled") {
+      return res.status(401).send({ message: "Approval Pending! Contact Admin!" });
+    }
+
+    const payload = {
+      name: checkEmail.name,
+      user_id: checkEmail.user_id,
+      mobile: checkEmail.mobile,
+      role: checkEmail.role,
+      org_name: checkEmail.org_name,
+      email: checkEmail.email,
+    };
+    const jwtToken = jwt.sign(payload, process.env.SECRET_KEY, { expiresIn: "1d" });
+
+    res.setHeader("Authorization", `Bearer ${jwtToken}`);
+    return res.status(200).send({ jwtToken });
+  } catch (e) {
+    return res.status(500).send({ error: e.message });
+  }
+};
 
 exports.raiseTicket=async(req,res)=>{
     try{
@@ -117,24 +134,28 @@ exports.getAllTicketsOfUser=async(req,res)=>{
     }
 }
 
-exports.resolveTicket=async(req,res)=>{
-    try{
-    const {ticketId}=req.params
-    const disableTicket=await ticket.findOneAndUpdate({ticketId:ticketId},{status:"Resolved"})
-    if (disableTicket){
-        res.status(200).send({message:"Ticket Revoked Successfully"})
-    }}catch(e){
-        res.status(500).send({error:e.message})
+exports.resolveTicket = async (req, res) => {
+  try {
+    const { ticketId } = req.params;
+    const disableTicket = await updateTicketStatus(ticketId, "Resolved");
+    if (disableTicket) {
+      return res.status(200).send({ message: "Ticket Revoked Successfully" });
     }
-}
+    return res.status(404).send({ message: "Ticket not found" });
+  } catch (e) {
+    return res.status(500).send({ error: e.message });
+  }
+};
 
-exports.invokeTicket=async(req,res)=>{
-    try{
-    const {ticketId}=req.params
-    const EnableTicket=await ticket.findOneAndUpdate({ticketId:ticketId},{status:"Created"})
-    if (EnableTicket){
-        res.status(200).send({message:"Ticket Invoked Successfully"})
-    }}catch(e){
-        res.status(500).send({error:e.message})
+exports.invokeTicket = async (req, res) => {
+  try {
+    const { ticketId } = req.params;
+    const enableTicket = await updateTicketStatus(ticketId, "Created");
+    if (enableTicket) {
+      return res.status(200).send({ message: "Ticket Invoked Successfully" });
     }
-}
+    return res.status(404).send({ message: "Ticket not found" });
+  } catch (e) {
+    return res.status(500).send({ error: e.message });
+  }
+};
